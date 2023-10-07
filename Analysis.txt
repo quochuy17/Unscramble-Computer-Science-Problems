@@ -1,0 +1,23 @@
+Project 1 - Unscramble Computer Science Problems - Analysis Process
+
+Task 0:
+ + Time Complexity - O(1)
+ + Due to its running time being independent of the input size, this algorithm is constant time.
+
+Task 1:
+ + Time Complexity - O(n)
+ + This algorithm runs in linear time because, despite having two independent for-loops that are dependent on the input and each of which iterates from 1 to n, their combined complexity is only O(2n), thanks to the Big-O coefficient rule of dropping constants (coefficients in Big-O are negligible for large input sizes).
+
+Task 2:
+ + Time Complexity - O(n)
+ + This algorithm runs in linear time because it has a single for-loop that iterates from 1 to n, causing the running time to increase directly as n increases.
+
+Task 3:
+ + Time Complexity - O(nlog(n))
+ + Despite having two independent for-loops that are dependent on the input and each iterating from 1 to n, resulting in O(2n), this algorithm runs in superlinear time since it also has a sorting function that is 0(nlogn) in size. These two when combined yield the value 0(2n + nlogn). 
+   The temporal complexity can be reduced to O(nlog(n)) by applying the Big-O rule of eliminating non-dominant words (less dominating phrases in Big-O are negligible with high input quantities).
+   
+Task 4:
+ + Time Complexity - O(nlog(n))
+ + Although this algorithm includes two independent for-loops that are dependent on the input and each iterates from 1 to n, resulting in O(2n), it also has a sorting function that is 0(nlogn), which means that it runs in superlinear time. These two added together yield 0(2n + nlogn). 
+   The temporal complexity can be reduced to O(nlog(n)) by removing non-dominant elements, as stated by the Big-O rule (less dominating terms in Big-O are negligible with high input quantities).
