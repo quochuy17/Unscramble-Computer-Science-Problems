@@ -1,22 +1,22 @@
-# import libraries
 import csv
-with open('texts.csv', 'r') as f:
-    reader = csv.reader(f)
-    texts = list(reader)
 
-with open('calls.csv', 'r') as f:
-    reader = csv.reader(f)
-    calls = list(reader)
+# Function to read a CSV file and return its data as a list of lists
+def read_csv_file(file_name):
+    with open(file_name, 'r') as file:
+        reader = csv.reader(file)
+        data = list(reader)
+    return data
 
+if __name__ == "__main__":
+    # Read data from 'texts.csv' and 'calls.csv'
+    texts = read_csv_file('texts.csv')
+    calls = read_csv_file('calls.csv')
 
-"""
-TASK 0:
-What is the first record of texts and what is the last record of calls?
-Print messages:
-"First record of texts, <incoming number> texts <answering number> at time <time>"
-"Last record of calls, <incoming number> calls <answering number> at time <time>, lasting <during> seconds"
-"""
-print("First record of texts, {} texts {} at time {}"
-      .format(texts[0][0], texts[0][1], texts[0][2]))
-print("Last record of calls, {} calls {} at time {}, lasting {} seconds"
-      .format(calls[-1][0], calls[-1][1], calls[-1][2], calls[-1][3]))
+    # Task 0: Print the first record of texts and the last record of calls
+    first_text = texts[0]
+    last_call = calls[-1]
+
+    print("First record of texts, {} texts {} at time {}"
+          .format(first_text[0], first_text[1], first_text[2]))
+    print("Last record of calls, {} calls {} at time {}, lasting {} seconds"
+          .format(last_call[0], last_call[1], last_call[2], last_call[3]))

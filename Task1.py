@@ -1,27 +1,31 @@
-# import libraries
 import csv
-with open('texts.csv', 'r') as f:
-    reader = csv.reader(f)
-    texts = list(reader)
 
-with open('calls.csv', 'r') as f:
-    reader = csv.reader(f)
-    calls = list(reader)
+def read_csv_file(file_name):
+    with open(file_name, 'r') as file:
+        reader = csv.reader(file)
+        data = list(reader)
+    return data
 
+def find_unique_telephone_numbers(texts, calls):
+    telephone_numbers = set()
 
-"""
-TASK 1:
-How many different telephone numbers are there in the records? 
-Print a message:
-"There are <count> different telephone numbers in the records."
-"""
-telephone_numbers = set()
-for i in range(len(texts)):
-    telephone_numbers.add(texts[i][0])
-    telephone_numbers.add(texts[i][1])
-for i in range(len(calls)):
-    telephone_numbers.add(calls[i][0])
-    telephone_numbers.add(calls[i][1])
+    for text in texts:
+        telephone_numbers.add(text[0])
+        telephone_numbers.add(text[1])
 
-print("There are {} different telephone numbers in the records.".format(
-    len(telephone_numbers)))
+    for call in calls:
+        telephone_numbers.add(call[0])
+        telephone_numbers.add(call[1])
+
+    return telephone_numbers
+
+if __name__ == "__main__":
+    # Read data from 'texts.csv' and 'calls.csv'
+    texts = read_csv_file('texts.csv')
+    calls = read_csv_file('calls.csv')
+
+    # Task 1: Find unique telephone numbers in both texts and calls records
+    unique_numbers = find_unique_telephone_numbers(texts, calls)
+
+    # Print the count of different telephone numbers in the records
+    print("The records contain {} unique telephone numbers.".format(len(unique_numbers)))

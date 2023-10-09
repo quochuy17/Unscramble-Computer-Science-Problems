@@ -1,42 +1,34 @@
-# import libraries
 import csv
-from itertools import chain
-with open('texts.csv', 'r') as f:
-    reader = csv.reader(f)
-    texts = list(reader)
 
-with open('calls.csv', 'r') as f:
-    reader = csv.reader(f)
-    calls = list(reader)
+# Function to read a CSV file and return its data as a list of lists
+def read_csv_file(file_name):
+    with open(file_name, 'r') as file:
+        reader = csv.reader(file)
+        data = list(reader)
+    return data
 
-"""
-TASK 4:
-The phone company seeks to track down any numbers that may be engaged in telephone marketing. 
-Create a list of phone numbers that might be telemarketers; 
-these are the ones that make outbound calls but never send, receive, or answer texts or calls.
+if __name__ == "__main__":
+    # Read data from 'texts.csv' and 'calls.csv'
+    texts = read_csv_file('texts.csv')
+    calls = read_csv_file('calls.csv')
 
-Print a message:
-"These numbers could be telemarketers: "
-<list of numbers>
-The list of numbers should be print out one per line in lexicographic order with no duplicates.
-"""
+    # Task 4: Identify potential telemarketers
 
-telephone_numbers_in_texts = list(chain.from_iterable(
-    [(sender, reciever) for sender, reciever, _ in texts]))
+    # Extract telephone numbers from texts
+    telephone_numbers_in_texts = set(chain.from_iterable(
+        [(sender, receiver) for sender, receiver, _ in texts]))
 
-texters = set(telephone_numbers_in_texts)
+    # Create sets of callers and call receivers
+    callers = set()
+    call_receivers = set()
 
-callers = set()
-call_recievers = set()
+    for caller, receiver, _, _ in calls:
+        callers.add(caller)
+        call_receivers.add(receiver)
 
-for caller, reciever, _, _ in calls:
-    callers.add(caller)
-    call_recievers.add(reciever)
+    # Telemarketers don't text or receive calls
+    possible_telemarketers = callers - (telephone_numbers_in_texts | call_receivers)
 
-# telemarkerters don't text or revicieve callers
-possible_telemarkerters = callers - (texters | call_recievers)
-
-print("These numbers could be telemarketers:")
-
-for tel_number in sorted(possible_telemarkerters):
-    print(tel_number)
+    print("These numbers could be telemarketers:")
+    for tel_number in sorted(possible_telemarketers):
+        print(tel_number)
